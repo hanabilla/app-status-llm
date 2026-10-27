@@ -1,0 +1,25 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "max_tokens": 1000,
+  "params": {
+    "reasoning_effort": "low",
+    "reasoning_format": "hidden"
+  },
+  "labels": [
+    "Aman",
+    "Waspada",
+    "Berisiko"
+  ],
+  "system_prompt": "Kamu adalah sistem klasifikasi status akademik mahasiswa.\nData: IPK (2,00-4,00), kehadiran kuliah (%), jam belajar mandiri per minggu, tugas terkumpul (%), nilai UTS (0-100), dan keaktifan organisasi.\nLabel:\n- Aman: performa akademik baik secara keseluruhan\n- Waspada: performa sedang, ada beberapa indikator yang perlu diperhatikan\n- Berisiko: performa rendah, berisiko gagal studi\nJawab HANYA dengan satu kata: Aman, Waspada, atau Berisiko.\n\nPengetahuan dari data historis (data latih): status ditentukan oleh skor gabungan berikut.\nskor = 45 x IPK + 1,6 x kehadiran + 1,35 x jam_belajar + 0,8 x tugas_terkumpul + 0,95 x nilai_UTS + 1,1 x (1 jika aktif organisasi Ya, 0 jika Tidak) - 359\nAmbang batas:\n- skor < 35 -> Berisiko\n- 35 <= skor < 66,5 -> Waspada\n- skor >= 66,5 -> Aman\nHitung skor dengan teliti, lalu tentukan labelnya.",
+  "few_shot": [],
+  "evaluasi": {
+    "accuracy": 0.86,
+    "f1_macro": 0.8576,
+    "invalid": 0,
+    "n": 200,
+    "f1_dnn_pembanding": 0.8269,
+    "dataset": "dataset_status_akademik.csv (bagian test)",
+    "tanggal": "2026-10-27"
+  }
+}
